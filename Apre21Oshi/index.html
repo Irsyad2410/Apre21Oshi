@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Special Tribute for Apre21oshi</title>
+    <style>
+      :root {
+        --primary: #ff66b2;
+        --secondary: #993366;
+        --accent: #ffcc00;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fef6f6;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("") repeat;
+        opacity: 0.1;
+        pointer-events: none;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .subtitle {
+        font-size: 1.5rem;
+        margin-top: 10px;
+        font-weight: 300;
+        position: relative;
+      }
+
+      .heart {
+        color: var(--accent);
+        animation: pulse 1.5s infinite;
+        display: inline-block;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.3);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .message-section {
+        background-color: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin: 40px 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        position: relative;
+      }
+
+      .message-section::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid white;
+      }
+
+      .gallery-section {
+        margin: 60px 0;
+      }
+
+      .gallery-title {
+        text-align: center;
+        font-size: 2.2rem;
+        color: var(--secondary);
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .gallery-title::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(to right, var(--primary), var(--accent));
+        margin: 10px auto;
+        border-radius: 2px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .gallery-item {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        color: white;
+        padding: 15px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item:hover .gallery-caption {
+        opacity: 1;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+      }
+
+      .modal-content img {
+        max-width: 100%;
+        max-height: 90vh;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .timeline-section {
+        margin: 60px 0;
+      }
+
+      .timeline-title {
+        text-align: center;
+        font-size: 2.2rem;
+        color: var(--secondary);
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .timeline-title::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(to right, var(--primary), var(--accent));
+        margin: 10px auto;
+        border-radius: 2px;
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .timeline::after {
+        content: "";
+        position: absolute;
+        width: 6px;
+        background-color: var(--primary);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+        border-radius: 3px;
+      }
+
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        right: -12px;
+        background-color: white;
+        border: 4px solid var(--accent);
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .left {
+        left: 0;
+      }
+
+      .right {
+        left: 50%;
+      }
+
+      .right::after {
+        left: -12px;
+      }
+
+      .timeline-content {
+        padding: 20px 30px;
+        background-color: white;
+        position: relative;
+        border-radius: 6px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .timeline-date {
+        font-weight: bold;
+        color: var(--secondary);
+        margin-bottom: 10px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px;
+        background: linear-gradient(135deg, var(--secondary), #660033);
+        color: white;
+        margin-top: 60px;
+      }
+
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background-color: var(--accent);
+        opacity: 0;
+        animation: confetti-fall 5s linear forwards;
+        z-index: 100;
+      }
+
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(-100px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .subtitle {
+          font-size: 1.2rem;
+        }
+
+        .timeline::after {
+          left: 31px;
+        }
+
+        .timeline-item {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 25px;
+        }
+
+        .timeline-item::after {
+          left: 18px;
+        }
+
+        .left::after,
+        .right::after {
+          left: 18px;
+        }
+
+        .right {
+          left: 0%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Happy Special Day, Apre21oshi!</h1>
+        <p class="subtitle">
+          Terima kasih untuk semua kerja keras dan dedikasimu
+          <span class="heart">❤</span>
+        </p>
+      </div>
+    </header>
+
+    <div class="container">
+      <section class="message-section">
+        <h2 style="text-align: center; color: var(--secondary)">
+          #Apre21Oshi Untuk Oshiku Terhebat
+        </h2>
+        <p style="font-size: 1.1rem; line-height: 1.6; text-align: center">
+          melalui pesan ini kami ingin menyampaikan rasa bangga dan terima kasih
+          yang tulus untukmu, Intan.<br />
+          Kerja keras, semangat, dan ketulusanmu benar-benar menginspirasi kami
+          semua.<br />
+          Meski lelah, kamu tetap meluangkan waktu untuk menyapa dan membuat
+          kami tersenyum—itu sangat berarti.<br />
+          Teruslah melangkah dengan keberanian, karena banyak hati yang telah
+          kamu sentuh.<br />
+          Kami akan selalu mendukungmu, bukan hanya hari ini, tapi selamanya.<br />
+          Terus bersinar, Intan! 🌟
+        </p>
+      </section>
+
+      <section class="gallery-section">
+        <h2 class="gallery-title">Perjalanan Gemilang Nur Intan</h2>
+        <div class="gallery-grid">
+          <!-- Item galeri 1 -->
+          <div class="gallery-item">
+            <img
+              src="image/intanpayung.jpg"
+              alt="Perkenalan Sebagai Member Gen 13"
+            />
+            <div class="gallery-caption">Momen debut yang penuh semangat</div>
+          </div>
+
+          <!-- Item galeri 2 -->
+          <div class="gallery-item">
+            <img src="image/shonichi.jpg" alt="First Concert" />
+            <div class="gallery-caption">
+              Shonichi Aittakatta yang penuh semangat
+            </div>
+          </div>
+
+          <!-- Item galeri 3 -->
+          <div class="gallery-item">
+            <img src="image/salto.jpg" alt="Fans Meeting" />
+            <div class="gallery-caption">Performance yang sangat energik</div>
+          </div>
+
+          <!-- Item galeri 4 -->
+          <div class="gallery-item">
+            <img src="image/Jkt48 School.jpg" alt="Award Show" />
+            <div class="gallery-caption">Penampilan memukau di award show</div>
+          </div>
+
+          <!-- Item galeri 5 -->
+          <div class="gallery-item">
+            <img src="image/pajamjam.jpg" alt="Behind The Scene" />
+            <div class="gallery-caption">
+              Shonichi Pajama Drive yang penuh semangat
+            </div>
+          </div>
+
+          <!-- Item galeri 6 -->
+          <div class="gallery-item">
+            <img
+              src="https://via.placeholder.com/800x600/cc99ff/ffffff?text=Special+Stage"
+              alt="Special Stage"
+            />
+            <div class="gallery-caption">
+              Penampilan spesial yang tak terlupakan
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="timeline-section">
+        <h2 class="timeline-title">Timeline Perjalanan Karir</h2>
+        <div class="timeline">
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <div class="timeline-date">Desember 2024</div>
+              <p>Debut & Perkenalan sebagai member gen 13 JKT48</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <div class="timeline-date">Januari 2025</div>
+              <p>Shonichi Setlist "Aittakatta" sebagai member traine gen 13</p>
+            </div>
+          </div>
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <div class="timeline-date">Febuari 2025</div>
+              <p>
+                Penampilan dipanggung pada acara JKT48 26th Single MnG Festival
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <div class="timeline-date">Maret 2025</div>
+              <p>Show Theather spesial ramadhan event "JKT48School"</p>
+            </div>
+          </div>
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <div class="timeline-date">Mei 2025</div>
+              <p>
+                Shonichi Setlist "Pajama Drive" sebagai member traine gen 13
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <div class="timeline-date">Sekarang</div>
+              <p>Terus bersinar dan memberikan inspirasi bagi banyak orang</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Modal untuk gambar -->
+    <div id="imageModal" class="modal">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+        <img id="modalImage" src="" alt="" />
+      </div>
+    </div>
+
+    <footer>
+      <p>Made with ❤ by Fans Apre21oshi | © 2023</p>
+    </footer>
+
+    <script>
+      // Fungsi untuk modal gambar
+      function openModal(src) {
+        document.getElementById("modalImage").src = src;
+        document.getElementById("imageModal").style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      // Tutup modal ketika klik di luar gambar
+      window.onclick = function (event) {
+        const modal = document.getElementById("imageModal");
+        if (event.target == modal) {
+          closeModal();
+        }
+      };
+
+      // Buat confetti
+      function createConfetti() {
+        const colors = ["#ff66b2", "#993366", "#ffcc00", "#66ccff", "#99cc99"];
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor =
+          colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.width = Math.random() * 10 + 5 + "px";
+        confetti.style.height = Math.random() * 10 + 5 + "px";
+        confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+        document.body.appendChild(confetti);
+
+        // Hapus confetti setelah animasi selesai
+        setTimeout(() => {
+          confetti.remove();
+        }, 5000);
+      }
+
+      // Jalankan confetti secara periodik
+      setInterval(createConfetti, 150);
+
+      // Juga buat confetti saat mengklik di mana saja
+      document.addEventListener("click", function () {
+        for (let i = 0; i < 20; i++) {
+          setTimeout(createConfetti, i * 100);
+        }
+      });
+    </script>
+  </body>
+</html>
